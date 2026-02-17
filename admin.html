@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HattrickPlus - غرفة التحكم السحرية</title>
+    <title>HattrickPlus - غرفة التحكم</title>
     <style>
-        body { background-color: #0f172a; color: #f8fafc; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; padding: 20px; gap: 20px; height: 95vh;}
-        .box { background: #1e293b; padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        .admin-form { flex: 1; border-top: 4px solid #16a34a; }
-        .news-feed { flex: 1; border-top: 4px solid #3b82f6; overflow-y: auto; }
-        h2 { color: #22c55e; margin-top: 0; }
+        body { background-color: #0f172a; color: #f8fafc; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; flex-wrap: wrap; padding: 20px; gap: 20px; min-height: 100vh;}
+        .box { background: #1e293b; padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); width: 100%; box-sizing: border-box; }
+        /* توزيع المساحات للكمبيوتر */
+        .admin-form, .news-feed { flex: 1 1 400px; }
+        .admin-form { border-top: 4px solid #16a34a; }
+        .news-feed { border-top: 4px solid #3b82f6; overflow-y: auto; max-height: 90vh; }
+        
+        h2 { color: #22c55e; margin-top: 0; text-align: center; }
         .news-feed h2 { color: #3b82f6; }
         input, textarea, button { width: 100%; margin-bottom: 15px; padding: 12px; border: 1px solid #334155; border-radius: 6px; background: #0f172a; color: white; font-size: 16px; box-sizing: border-box; }
         button { background: #16a34a; color: white; font-weight: bold; cursor: pointer; border: none; transition: 0.3s;}
@@ -19,10 +22,18 @@
         .feed-item { background: #0f172a; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #334155; }
         .feed-item img { width: 100%; border-radius: 4px; height: 150px; object-fit: cover; }
         .feed-item h4 { margin: 10px 0; font-size: 16px; color: #f8fafc; line-height: 1.4; }
+        .feed-date { font-size: 12px; color: #94a3b8; margin-bottom: 10px; display: block; }
         .action-buttons { display: flex; gap: 10px; margin-bottom: 0; }
         .action-buttons button { margin-bottom: 0; padding: 8px; font-size: 14px; }
         .btn-edit { background: #f59e0b; } .btn-edit:hover { background: #d97706; }
         .btn-quick { background: #ef4444; } .btn-quick:hover { background: #dc2626; }
+
+        /* تعديلات مخصصة للموبايل */
+        @media (max-width: 768px) {
+            body { padding: 10px; flex-direction: column; }
+            .box { flex: none; width: 100%; }
+            .news-feed { max-height: none; } /* إلغاء التقييد ليتمكن من النزول براحته */
+        }
     </style>
 </head>
 <body>
@@ -38,10 +49,10 @@
     </div>
 
     <div class="box news-feed">
-        <h2>أخبار كورة بلس الجاهزة 📡</h2>
+        <h2>رادار الأخبار العالمية 📡</h2>
         <button class="fetch-btn" id="fetchNewsBtn">تحديث وسحب أحدث الأخبار</button>
         <div id="feedContainer">
-            <p style="text-align:center; color:#94a3b8;">اضغط على الزر بالأعلى لسحب الأخبار فوراً.</p>
+            <p style="text-align:center; color:#94a3b8;">اضغط على الزر بالأعلى لسحب الأخبار.</p>
         </div>
     </div>
 
